@@ -10,7 +10,7 @@ OPTIONS = {
         'CFBundleDisplayName': 'Slack DND',
         'CFBundleGetInfoString': 'Slack DND',
         'CFBundleIdentifier': 'com.github.furkanpehli1.Slack-DND',
-        'CFBundleVersion': '0.1',
+        'CFBundleVersion': '0.0.1',
         'LSUIElement': True,
     },
     'packages': ['rumps'],

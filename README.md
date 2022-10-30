@@ -17,6 +17,14 @@ Slack DND requires a Slack API token to work. You can get one by following the i
 
 ## Installation
 
+### From Releases
+
+Run following command in your favorite terminal:
+
+```bash
+curl -sL https://github.com/furkanpehli1/Slack-DND/releases/download/v0.0.1/Slack.DND.tar.gz | tar -zx -C /Applications
+```
+
 ### From Source Code
 
 1. Clone the repository and navigate to the project directory.
