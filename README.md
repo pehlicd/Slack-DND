@@ -32,3 +32,7 @@ curl -sL https://github.com/furkanpehli1/Slack-DND/releases/download/v0.0.1/Slac
 3. Run `python setup.py py2app` to build the application.
 4. Copy the application to your Applications folder with `cp dist/Slack\ DND.app/Contents/MacOS/Slack\ DND  ~/Applications/Slack\ DND` command.
 5. You are ready to go! Run **Slack DND** 💤
+
+## Contribution
+
+See [Contribution Guide](CONTRIBUTING.md).
