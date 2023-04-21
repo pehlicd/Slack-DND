@@ -9,8 +9,7 @@ on:
 
 jobs:
   build:
-
-    runs-on: python:latest
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -18,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4.6.0
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
