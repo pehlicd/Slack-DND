@@ -1,6 +1,13 @@
 #
 # Copyright (c) 2022 Furkan Pehlivan
 #
+#    _____ __           __      ____  _   ______
+#   / ___// /___ ______/ /__   / __ \/ | / / __ \
+#   \__ \/ / __ `/ ___/ //_/  / / / /  |/ / / / /
+#  ___/ / / /_/ / /__/ ,<    / /_/ / /|  / /_/ /
+# /____/_/\__,_/\___/_/|_|  /_____/_/ |_/_____/
+#
+
 
 import requests
 import rumps
@@ -41,12 +48,12 @@ else:
                 conf_data = "{" + '"oauth_token": "' + token.text + '"' + "}"
                 f.write(conf_data)
         else:
-            rumps.alert(message='Invalid token. Please try again.', icon_path='./icon.png',  title='Slack-DND Error')
+            rumps.alert(message='Invalid token. Please try again.', icon_path='./icon.png', title='Slack-DND Error')
             rumps.quit_application()
 
 # Read config file
-with open(home + "/.slack-dnd/config.json") as conffile:
-	data = json.load(conffile)
+with open(home + "/.slack-dnd/config.json") as confFile:
+    data = json.load(confFile)
 
 oauth_token = data["oauth_token"]
 
@@ -55,8 +62,9 @@ resp = requests.get("https://slack.com/api/dnd.info", headers={'Authorization': 
 if resp.json().get('ok') == True:
     pass
 else:
-    rumps.alert(message='Invalid token. Please try again.', icon_path='./icon.png',  title='Slack-DND Error')
+    rumps.alert(message='Invalid token. Please try again.', icon_path='./icon.png', title='Slack-DND Error')
     rumps.quit_application()
+
 
 class SlackDnd(object):
     def __init__(self):
@@ -70,7 +78,8 @@ class SlackDnd(object):
             "dnd_off": "🔔"
         }
 
-        self.app = rumps.App(name=self.config["app_name"], icon=self.config["icon"], quit_button=self.config["quit_button"])
+        self.app = rumps.App(name=self.config["app_name"], icon=self.config["icon"],
+                             quit_button=self.config["quit_button"])
         self.dnd_on_button_30 = rumps.MenuItem(title=self.config["dnd_on_30"], callback=self.dnd_on(duration=30))
         self.dnd_on_button_60 = rumps.MenuItem(title=self.config["dnd_on_60"], callback=self.dnd_on(duration=60))
         self.dnd_on_button_120 = rumps.MenuItem(title=self.config["dnd_on_120"], callback=self.dnd_on(duration=120))
@@ -79,27 +88,29 @@ class SlackDnd(object):
 
     def dnd_on(self, callback, duration):
         resp = requests.post("https://slack.com/api/dnd.setSnooze", headers={
-                            "pretty": "1",
-                            "Authorization": "Bearer " + oauth_token
-                            }, params={"num_minutes": duration})
-                            # TODO: Add custom time
+            "pretty": "1",
+            "Authorization": "Bearer " + oauth_token
+        }, params={"num_minutes": duration})
+        # TODO: Add custom time
         if resp.json().get('ok') == True:
-            rumps.notification(title='Slack DND', subtitle='', message='DND is on for ' + str(duration) + ' minutes', icon='./icon.png')
+            rumps.notification(title='Slack DND', subtitle='', message='DND is on for ' + str(duration) + ' minutes',
+                               icon='./icon.png')
         else:
-            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png',  title='Slack DND Error')
-    
+            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png', title='Slack DND Error')
+
     def dnd_off(self, callback):
         resp = requests.post("https://slack.com/api/dnd.endDnd", headers={
-                            "pretty": "1",
-                            "Authorization": "Bearer " + oauth_token
-                            })
+            "pretty": "1",
+            "Authorization": "Bearer " + oauth_token
+        })
         if resp.json().get('ok') == True:
             rumps.notification(title="Slack DND", subtitle="", message="DND is off", icon="./icon.png")
         else:
-            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png',  title='Slack DND Error')
+            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png', title='Slack DND Error')
 
     def run(self):
         self.app.run()
+
 
 if __name__ == '__main__':
     app = SlackDnd()
