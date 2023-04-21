@@ -22,7 +22,7 @@ jobs:
     #    python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        pip3 install –upgrade setuptools
+        pip3 install –-upgrade setuptools
         pip3 install -r requirements.txt
     - name: Build with py2app and compress with tar
       run: |
