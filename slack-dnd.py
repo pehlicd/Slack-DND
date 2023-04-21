@@ -8,7 +8,6 @@
 # /____/_/\__,_/\___/_/|_|  /_____/_/ |_/_____/
 #
 
-
 import requests
 import rumps
 from pathlib import Path
