@@ -33,7 +33,7 @@ Slack DND requires a Slack API token to work. You can get one by following the i
 Run following command in your favorite terminal:
 
 ```bash
-curl -sL https://github.com/pehlicd/Slack-DND/releases/download/v0.0.1/Slack.DND.tar.gz | tar -zx -C /Applications
+curl -sL https://github.com/pehlicd/Slack-DND/releases/download/v0.0.3/Slack.DND.tar.gz | tar -zx -C /Applications
 ```
 
 ### From Source Code
