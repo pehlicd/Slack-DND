@@ -1,4 +1,6 @@
 build/*
-dist/*
+dist*/*
 venv/*
 .DS_Store
+.idea
+.eggs

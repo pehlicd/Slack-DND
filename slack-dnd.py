@@ -59,31 +59,34 @@ else:
     rumps.quit_application()
 
 class SlackDnd(object):
-
     def __init__(self):
         self.config = {
             "app_name": "Slack DND",
             "icon": "icon.png",
             "quit_button": "❌",
-            "dnd_on": "🔕",
+            "dnd_on_30": "🔕 for 30 minutes",
+            "dnd_on_60": "🔕 for an hour",
+            "dnd_on_120": "🔕 for 2 hours",
             "dnd_off": "🔔"
         }
 
         self.app = rumps.App(name=self.config["app_name"], icon=self.config["icon"], quit_button=self.config["quit_button"])
-        self.dnd_on_button = rumps.MenuItem(title=self.config["dnd_on"], callback=self.dnd_on)
+        self.dnd_on_button_30 = rumps.MenuItem(title=self.config["dnd_on_30"], callback=self.dnd_on(duration=30))
+        self.dnd_on_button_60 = rumps.MenuItem(title=self.config["dnd_on_60"], callback=self.dnd_on(duration=60))
+        self.dnd_on_button_120 = rumps.MenuItem(title=self.config["dnd_on_120"], callback=self.dnd_on(duration=120))
         self.dnd_off_button = rumps.MenuItem(title=self.config["dnd_off"], callback=self.dnd_off)
-        self.app.menu = [self.dnd_on_button, self.dnd_off_button]
+        self.app.menu = [self.dnd_on_button_30, self.dnd_on_button_60, self.dnd_on_button_120, self.dnd_off_button]
 
-    def dnd_on(self, callback):
+    def dnd_on(self, callback, duration):
         resp = requests.post("https://slack.com/api/dnd.setSnooze", headers={
                             "pretty": "1",
                             "Authorization": "Bearer " + oauth_token
-                            }, params={"num_minutes": 60})
+                            }, params={"num_minutes": duration})
                             # TODO: Add custom time
         if resp.json().get('ok') == True:
-            rumps.notification(title='Slack DND', subtitle='', message='DND is on for 60 minutes', icon='./icon.png')
+            rumps.notification(title='Slack DND', subtitle='', message='DND is on for ' + str(duration) + ' minutes', icon='./icon.png')
         else:
-            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png',  title='Slack-DND Error')
+            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png',  title='Slack DND Error')
     
     def dnd_off(self, callback):
         resp = requests.post("https://slack.com/api/dnd.endDnd", headers={
@@ -93,7 +96,7 @@ class SlackDnd(object):
         if resp.json().get('ok') == True:
             rumps.notification(title="Slack DND", subtitle="", message="DND is off", icon="./icon.png")
         else:
-            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png',  title='Slack-DND Error')
+            rumps.alert(message='Something went wrong\n' + resp.text, icon_path='./icon.png',  title='Slack DND Error')
 
     def run(self):
         self.app.run()

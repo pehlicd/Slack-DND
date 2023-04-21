@@ -1,4 +1,15 @@
+![Release](https://github.com/pehlicd/Slack-DND/actions/workflows/create-release.yaml/badge.svg?branch=main)
+
 # Slack DND 💤
+
+```
+   _____ __           __      ____  _   ______ 
+  / ___// /___ ______/ /__   / __ \/ | / / __ \
+  \__ \/ / __ `/ ___/ //_/  / / / /  |/ / / / /
+ ___/ / / /_/ / /__/ ,<    / /_/ / /|  / /_/ / 
+/____/_/\__,_/\___/_/|_|  /_____/_/ |_/_____/  
+                                            
+```
 
 Slack DND is a simple MacOS status bar application that allows you to set your Slack status to Do Not Disturb (DND) mode. 
 It is useful for those who want to avoid distractions during their work hours.
@@ -29,7 +40,7 @@ curl -sL https://github.com/pehlicd/Slack-DND/releases/download/v0.0.1/Slack.DND
 
 1. Clone the repository and navigate to the project directory.
 2. Install required dependencies with `pip3 install -r requirements.txt`.
-3. Run `python setup.py py2app` to build the application.
+3. Run `python3 setup.py py2app` to build the application.
 4. Copy the application to your Applications folder with `cp dist/Slack\ DND.app/Contents/MacOS/Slack\ DND  ~/Applications/Slack\ DND` command.
 5. You are ready to go! Run **Slack DND** 💤
 
