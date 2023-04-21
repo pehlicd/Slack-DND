@@ -31,7 +31,7 @@ jobs:
         draft: false
         prerelease: false
     - name: Create Release
-      id: create_release
+      id: create_main_release
       uses: actions/create-release@v1
       if: "contains(github.ref_name, 'main')"
       env:
