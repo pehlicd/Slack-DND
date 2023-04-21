@@ -44,10 +44,22 @@ jobs:
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
+      if: "!contains(github.ref_name, 'main')"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Slack.DND.tar.gz
+        asset_name: Slack.DND.tar.gz
+        asset_content_type: application/tar.gz
+    - name: Upload Release Asset
+      id: upload-release-asset-main
+      uses: actions/upload-release-asset@v1
+      if: "contains(github.ref_name, 'main')"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_main_release.outputs.upload_url }}
         asset_path: ./Slack.DND.tar.gz
         asset_name: Slack.DND.tar.gz
         asset_content_type: application/tar.gz
