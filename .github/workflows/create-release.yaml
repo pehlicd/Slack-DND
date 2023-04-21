@@ -2,8 +2,6 @@ name: Slack DND Release
 
 on:
   push:
-    tags:
-      - 'v*'
     branches:
       - main
 
