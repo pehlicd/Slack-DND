@@ -8,6 +8,6 @@ pathlib==1.0.1
 py2app==0.28.4
 pyobjc-core==8.5.1
 pyobjc-framework-Cocoa==8.5.1
-requests==2.28.1
+requests==2.31.0
 rumps==0.4.0
 urllib3==1.26.18
